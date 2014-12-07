@@ -27,6 +27,14 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step to "submit" the search form on the homepage
   # enter step(s) to ensure that PG and R movies are visible
   # enter step(s) to ensure that other movies are not visible
+  When I check the following ratings: PG, R
+  And I uncheck the following ratings: G, PG-13
+  And I press "ratings_submit"
+  Then I should see only movies with titles: The Terminator, When Harry Met Sally, Amelie, The Incredibles, Raiders of the Lost Ark
+  And I should not see movies with titles: Aladdin, The Help, Chocolat, 2001: A Space Odyssey, Chicken Run 
 
 Scenario: all ratings selected
   # see assignment
+  When I check the following ratings: G, PG, PG-13, R
+  And I press "ratings_submit"
+  Then I should see all the movies
